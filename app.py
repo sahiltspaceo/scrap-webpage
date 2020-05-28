@@ -1,5 +1,5 @@
 from flask import Flask,render_template,request
-import urllib.request
+import requests
 import logging.config
 import os
 
@@ -19,26 +19,16 @@ def hello():
 
 @app.route('/search-link', methods=['POST'])
 def search():
-    l1 = request.form['l1']
-    l2 = request.form['l2']
+    dest = request.form['l1']
+    source = request.form['l2']
 
-    try:
-        fp = urllib.request.urlopen(l2)
-        mybytes = fp.read()
-        mystr = mybytes.decode("utf8")
-        fp.close()
-
-        if l1 in mystr:
-            flag = 1
-            msg = 'Found'
-        else:
-            flag = 0
-            msg = 'Not found'
-    except:
-        msg = 'invalid Link'
+    scraped = requests.get(source).text
+    if dest in scraped:
+        flag = 1
+        msg = 'Found'
+    else:
         flag = 0
-
-
+        msg = 'Not found'
     data = {'flag':flag,'msg':msg}
     return render_template('index.html',**data)
 
