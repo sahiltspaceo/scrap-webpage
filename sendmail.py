@@ -48,6 +48,6 @@ def send_attachment(email,file):
 def send_mail(email,text):
     # Log in to server using secure context and send email
     context = ssl.create_default_context()
-    with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
+    with smtplib.SMTP_SSL("smtp.gmail.com", 587, context=context) as server:
         server.login(sender_email, password)
         server.sendmail(sender_email, email, text)
