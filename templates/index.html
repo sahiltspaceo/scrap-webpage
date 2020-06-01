@@ -7,16 +7,25 @@
 <div class="container" style="padding:20px">
     <form class="form-horizontal" action="/search-link" method="post">
         <div class="form-group">
-            <input type="text" class="form-control" id="l1" name="l1" aria-describedby="emailHelp" placeholder="Link to be searched">
+            <input type="file" class="form-control" id="l1" name="l1" aria-describedby="emailHelp" placeholder="Links to be searched">
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" id="l2" name="l2" placeholder="Web page link">
+            <input type="email" class="form-control" id="l2" name="l2" placeholder="Enter email to send reports to">
         </div>
-        {% if flag != 3%}
-        <div class="alert alert-{% if flag == 1 %}success{%else%}danger{%endif%}" role="alert">
-            {{msg}}
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Select Frequency
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Daily</a>
+                <a class="dropdown-item" href="#">Monthly</a>
+            </div>
         </div>
-        {% endif %}
+        <br>
+
+        <div class="alert" style="display:none" role="alert">
+        </div>
+
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
