@@ -48,6 +48,9 @@ def search():
     return "Your Job is scheduled."
 
 if __name__ == '__main__':
+    gunicorn_logger = logging.getLogger('gunicorn.error')
+    app.logger.handlers = gunicorn_logger.handlers
+    app.logger.setLevel(gunicorn_logger.level)
     # filename = os.path.join(app.config['UPLOAD_FOLDER'],"sahilt.spaceo@gmail.com_2020-05-29 18:13:46.286733_data.xlsx")
     # scrape_file(filename,"sahilt.spaceo@gmail.com")
     app.run()
