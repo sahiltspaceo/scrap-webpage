@@ -31,8 +31,6 @@ def search():
     frequency = request.form['frequency']
     f = request.files['file']
 
-
-
     dt = str(datetime.datetime.now())
     fname = email + "_" + dt +   '_' +  secure_filename(f.filename)
     filename = os.path.join(app.config['UPLOAD_FOLDER'],fname)
@@ -41,10 +39,13 @@ def search():
 
     if frequency == 'daily':
         sched.add_job(scrape_file,'interval',hours=24,args=[filename,email])
-    else:
+    elif frequency == 'monthly':
         sched.add_job(scrape_file, 'interval', days=30, args=[filename, email])
+    else:
+        scrape_file(filename,email)
+        return "Report sent to your mail."
 
-    return "suc"
+    return "Your Job is scheduled."
 
 if __name__ == '__main__':
     # filename = os.path.join(app.config['UPLOAD_FOLDER'],"sahilt.spaceo@gmail.com_2020-05-29 18:13:46.286733_data.xlsx")
