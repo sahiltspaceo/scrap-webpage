@@ -2,3 +2,4 @@ debug.log
 Pipfile
 Pipfile.lock
 templates/
+__pycache__/
