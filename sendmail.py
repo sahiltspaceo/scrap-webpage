@@ -49,5 +49,9 @@ def send_mail(email,text):
     # Log in to server using secure context and send email
     context = ssl.create_default_context()
     with smtplib.SMTP_SSL("smtp.sendgrid.net", 587, context=context) as server:
+        server.ehlo()
+        server.starttls()
+        server.ehlo()
         server.login(sender_email, password)
         server.sendmail(sender_email, email, text)
+        server.close()
